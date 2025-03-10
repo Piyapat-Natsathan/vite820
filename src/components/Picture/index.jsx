@@ -1,10 +1,8 @@
-const Picture = ({ picture, title}) => {
-  if(!picture) return null;
+const Picture = ({ picture, title }) => {
   return (
-    <div>
-        <img src={picture} alt={title} className="w-5/6 rounded-md border-2 border-primarySubcontent" />
-    </div>
+      <div>
+          <img src={picture} alt={title} className="w-5/6 rounded-md borded-2" />
+      </div>
   )
 }
-
 export default Picture;

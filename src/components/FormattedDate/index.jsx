@@ -1,12 +1,10 @@
-import { Children } from "react";
-
-const FormattedDate = ({ date }) => {
+const FormattedDate = ({ isHighLight, children }) => {
   return (
-    <div>
-        <span className={`text-sm ${isMouseEnter ['exp1'] ? "text-primaryAccent" : ""}`}>{Children}</span>
-    </div>
-
+      <div className="text-left">
+          <span className={`text-sm ${isHighLight ? "text-primaryAccent" : ""}`}>
+              {children}
+          </span>
+      </div>
   )
 }
-
 export default FormattedDate;

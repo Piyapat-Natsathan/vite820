@@ -9,60 +9,61 @@ import TitleLink from "../../components/TitleLink";
 import Description from "../../components/Description";
 import Tech from "../../components/Tech";
 import { data } from "../../contents/experience";
+import Material from "../../components/Material";
 
 const SECTION_ID = "experience-section";
 
 const Experience = () => {
-    const[isMouseEnter, setIsMouseEnter] = useState(false);
-    return(
-        <div id={SECTION_ID}>
-            <div className="text-left text-primaryAccent font-medium">Experience</div>
-            {
-                data.map(({
-                    date,
-                    title,
-                    link,
-                    materials,
-                    descriptions,
-                    skills,
-                    picture
-                },index)=>(
-                <div
-                    key={`${SECTION_ID}-${index}-${title.replaceAll("","")}`}
-                    className={`grid grid-cols-[30%_70%] rounded-md px-2 py-6 transition-all ${isMouseEnter['exp1'] ? "bg-gray-300":""}`}
-                    onMouseEnter={() => setIsMouseEnter({'exp1':true})}
-                    onMouseLeave={() => setIsMouseEnter({'exp1':false})}
+    const [isMouseEnter, setIsMouseEnter] = useState({});
+    return (
+    <div id={SECTION_ID}>
+        <div className="text-primaryAccent font-medium">Experience</div>
+        {
+            data.map(({
+                date = "",
+                title = "",
+                link = "",
+                materials =[],
+                descriptions= [],
+                skills= [],
+                picture= "",
+            }, index) => (
+                    <div
+                        key={`${SECTION_ID}-${index}-${title.replaceAll(" ", "")}`}
+                        className={`grid grid-cols-[25%_75%] hover:scale-105 rounded-md px-2 py-6 transition-all ${isMouseEnter [`${SECTION_ID}-${index}`] ? "bg-gray-200":""}`}
+                        onMouseEnter={() => setIsMouseEnter({[`${SECTION_ID}-${index}`]: true})}
+                        onMouseLeave={() => setIsMouseEnter({[`${SECTION_ID}-${index}`]:false})}
                     >
-                    <div className='text-left'>
-                        <FormattedDate isHighLight={isMouseEnter['exp1']}>{date}</FormattedDate>
-                        <Picture picture={picture} title={title}/>
-                    </div>
-                    <div className="flex flex-col gap-y-4">
-                        <TitleLink isHighLight={isMouseEnter['exp1']} title={title} link={link}/>
-
-                        <div className='flex gap-4 text-xl'>
+                        <div>
+                            <FormattedDate isHighLight = {isMouseEnter [`${SECTION_ID}-${index}`]}>{date}</FormattedDate>
+                            <Picture picture={picture} title={title}/>
+                        </div>
+                        <div className="grid gap-y-4">
+                            <TitleLink isHighLight = {isMouseEnter [`${SECTION_ID}-${index}`]} title={title} link={link}/>
+                           
+                            <div className='flex gap-4 text-xl'>
+                                {
+                                    materials.map((e,i) => (
+                                        <Material key={`${e}-material-${i}`} icon={e.type} link={e.link} />
+                                    ))
+                                }
+                            </div>
                             {
-                                materials.map((e,i)=>(
-                                    <Material key={`${e}-material-${i}`} icon={e.type} link="https://witchayut022.github.io/vite820/"/>
+                                descriptions.map((e,i) => (
+                                    <Description key={`${e}-descriptions-${i}`} description={e}/>
+                                ))
+                            }
+                            {
+                                skills.map((e,i) => (
+                                    <Tech key={`${e}-skill-${i}`} isHighLight = {isMouseEnter [`${SECTION_ID}-${index}`]} data={e}/>
                                 ))
                             }
                         </div>
-                            {
-                                descriptions.map((e,i)=>(
-                                    <Description key={`${e}-description-${i}`} description={e}/>
-                                ))
-                            }
-                            {
-                                skills.map((e,i)=>(
-                                 <Tech key={`${e}-skills-${i}`} isHighLight={isMouseEnter['exp1']} data={e}/>
-                                ))
-                            }
                     </div>
-                </div>
-                ))
-            }
-        </div>
-    );
-};
-
-export default Experienc
+           ))
+        }
+    </div>
+    )
+}
+ 
+export default Experience;
