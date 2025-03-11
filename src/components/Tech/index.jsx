@@ -14,3 +14,4 @@ const Tech = ({isHighLight, data}) => {
 
 export default Tech;
 
+

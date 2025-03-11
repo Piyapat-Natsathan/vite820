@@ -7,3 +7,4 @@ const Picture = ({ picture, title }) => {
 }
 export default Picture;
 
+
