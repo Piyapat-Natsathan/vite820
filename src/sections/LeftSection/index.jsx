@@ -20,3 +20,4 @@ const LeftSection = () => {
 }
 
 export default LeftSection;
+
